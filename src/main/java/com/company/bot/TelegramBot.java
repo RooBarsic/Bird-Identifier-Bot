@@ -101,9 +101,9 @@ public class TelegramBot extends TelegramLongPollingBot {
         }
 
         if (foundedBotCommand instanceof ReportTelegramBotCommand || numberOfMessages % 10 == 0) {
-            REPORT_TELEGRAM_BOT_COMMAND
-                    .setNumberOfMessages(numberOfMessages)
-                    .executeCommand(telegramUser, chatId, inputText);
+            REPORT_TELEGRAM_BOT_COMMAND.setNumberOfMessages(numberOfMessages);
+            REPORT_TELEGRAM_BOT_COMMAND.executeCommand(telegramUser, chatId, inputText);
+            return;
         }
 
         // Wait in queue
