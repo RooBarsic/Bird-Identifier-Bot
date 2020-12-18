@@ -100,7 +100,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             foundedBotCommand = HELP_TELEGRAM_BOT_COMMAND.copyThis();
         }
 
-        if (!(foundedBotCommand instanceof ReportTelegramBotCommand)) {
+        if (!(foundedBotCommand instanceof ReportTelegramBotCommand) && numberOfMessages % 10 == 0) {
             REPORT_TELEGRAM_BOT_COMMAND.setNumberOfMessages(numberOfMessages);
             REPORT_TELEGRAM_BOT_COMMAND.executeCommand(telegramUser, chatId, inputText);
         }
