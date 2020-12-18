@@ -23,8 +23,9 @@ public class ReportTelegramBotCommand extends DefaultAbsSender implements BotCom
         return command.startsWith("/report");
     }
 
-    public void setNumberOfMessages(int numberOfMessages) {
+    public ReportTelegramBotCommand setNumberOfMessages(int numberOfMessages) {
         this.numberOfMessages = numberOfMessages;
+        return this;
     }
 
     @Override
