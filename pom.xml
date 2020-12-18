@@ -48,7 +48,7 @@
                     <programs>
                         <program>
                             <mainClass>main.java.com.company.Main</mainClass>
-                            <name>workerBot</name>
+                            <name>workerTelegramBot</name>
                         </program>
                     </programs>
                 </configuration>
