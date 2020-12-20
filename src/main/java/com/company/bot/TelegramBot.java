@@ -30,6 +30,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     private final HelpTelegramBotCommand HELP_TELEGRAM_BOT_COMMAND;
     private final TestTelegramBotCommand TEST_TELEGRAM_BOT_COMMAND;
     private final StartTestTelegramBotCommand START_TEST_TELEGRAM_BOT_COMMAND;
+    private final ReportTelegramBotCommand REPORT_TELEGRAM_BOT_COMMAND;
 
     @Setter
     @Getter
@@ -49,6 +50,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         HELP_TELEGRAM_BOT_COMMAND = new HelpTelegramBotCommand(getOptions(), botToken);
         TEST_TELEGRAM_BOT_COMMAND = new TestTelegramBotCommand(getOptions(), botToken, questionsList);
         START_TEST_TELEGRAM_BOT_COMMAND = new StartTestTelegramBotCommand(getOptions(), botToken, questionsList);
+        REPORT_TELEGRAM_BOT_COMMAND = new ReportTelegramBotCommand(getOptions(), botToken);
     }
 
     @Override
@@ -91,8 +93,17 @@ public class TelegramBot extends TelegramLongPollingBot {
         else if(START_TEST_TELEGRAM_BOT_COMMAND.parseCommand(inputText) == true) {
             foundedBotCommand = START_TEST_TELEGRAM_BOT_COMMAND.copyThis();
         }
+        else if(REPORT_TELEGRAM_BOT_COMMAND.parseCommand(inputText)) {
+            foundedBotCommand = REPORT_TELEGRAM_BOT_COMMAND.copyThis();
+        }
         else {
             foundedBotCommand = HELP_TELEGRAM_BOT_COMMAND.copyThis();
+        }
+
+        if (foundedBotCommand instanceof ReportTelegramBotCommand || numberOfMessages % 10 == 0) {
+            REPORT_TELEGRAM_BOT_COMMAND.setNumberOfMessages(numberOfMessages);
+            REPORT_TELEGRAM_BOT_COMMAND.executeCommand(telegramUser, chatId, inputText);
+            return;
         }
 
         // Wait in queue
